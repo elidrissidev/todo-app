@@ -1,0 +1,14 @@
+.App {
+  min-height: 100%;
+}
+
+.App::before {
+  background: url(./assets/bg-mobile-light.jpg) top no-repeat;
+  background-size: cover;
+  content: '';
+  height: 12.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
