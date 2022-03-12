@@ -1,6 +1,7 @@
 .ThemeToggle {
   background: none;
   border: none;
+  padding: 0;
 }
 
 .ThemeToggle span {
