@@ -13,7 +13,7 @@ export function ThemeToggle() {
       aria-pressed={isDark}
     >
       <img src={isDark ? IconSun : IconMoon} alt="" />
-      <span>Toggle dark theme</span>
+      <span className="visually-hidden">Toggle dark theme</span>
     </button>
   )
 }
