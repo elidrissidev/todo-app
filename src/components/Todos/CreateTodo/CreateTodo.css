@@ -1,0 +1,32 @@
+.CreateTodo {
+  background-color: var(--card-bg-color);
+  border-radius: 0.3125rem;
+  margin: 2.5rem 0 1rem;
+  padding: 0.875rem 1.25rem;
+}
+
+.CreateTodo-form {
+  align-items: center;
+  display: flex;
+}
+
+.CreateTodo-input {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--text-primary-color);
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: normal;
+  letter-spacing: -0.17px;
+  margin-left: 0.5rem;
+  padding: 0.25rem;
+}
+
+.CreateTodo-input::placeholder {
+  color: var(--text-secondary-color);
+}
+
+.CreateTodo-input:focus {
+  outline: none;
+}

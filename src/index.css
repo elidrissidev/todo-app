@@ -1,9 +1,17 @@
 :root {
   --bg-color: #FAFAFA;
+  --card-bg-color: #FFFFFF;
+  --divider-color: #E3E4F1;
+  --text-primary-color: #393A4B;
+  --text-secondary-color: #9495A5;
 }
 
 .dark {
   --bg-color: #171823;
+  --card-bg-color: #25273D;
+  --divider-color: #393A4B;
+  --text-primary-color: #C8CBE7;
+  --text-secondary-color: #767992;
 }
 
 *,

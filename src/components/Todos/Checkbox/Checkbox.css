@@ -1,0 +1,15 @@
+.Checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  border: 1px solid var(--divider-color);
+  border-radius: 50%;
+  display: inline-block;
+  height: 1.25rem;
+  margin: 0;
+  width: 1.25rem;
+}
+
+.Checkbox:checked {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='9'%3E%3Cpath fill='none' stroke='%23FFF' stroke-width='2' d='M1 4.304L3.696 7l6-6'/%3E%3C/svg%3E") center no-repeat,
+    linear-gradient(-45deg, #C058F3, #55DDFF) no-repeat;
+}
