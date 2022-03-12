@@ -2,6 +2,10 @@
   --bg-color: #FAFAFA;
 }
 
+.dark {
+  --bg-color: #171823;
+}
+
 *,
 *::before,
 *::after {
