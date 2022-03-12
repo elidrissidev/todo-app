@@ -11,4 +11,9 @@
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: -1;
+}
+
+.AppContainer {
+  padding: 3rem 1.5rem 0;
 }
