@@ -1,5 +1,4 @@
 import './CreateTodo.css'
-import { Checkbox } from '../Checkbox'
 
 export function CreateTodo() {
   return (
@@ -8,7 +7,7 @@ export function CreateTodo() {
         <label htmlFor="todo-completed" className="visually-hidden">
           Todo Completed
         </label>
-        <Checkbox id="todo-completed" />
+        <input type="checkbox" id="todo-completed" className="Checkbox" />
         <label htmlFor="todo-title" className="visually-hidden">
           Create a new todo
         </label>
