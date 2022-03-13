@@ -1,18 +1,17 @@
+import { useQuery } from 'react-query'
+
 import './TodosList.css'
+import { getTodos } from '@/api'
 import { TodoItem } from '@/components/Todos/TodoItem'
-import useTodos from '@/hooks/useTodos'
+import { Todo } from '@/types'
 
 export function TodosList() {
-  const { todos, completeTodoMutation } = useTodos()
+  const { data: todos } = useQuery<Todo[]>('todos', getTodos)
   return (
     <div className="TodosList">
       <ul className="TodoList-list">
         {todos?.map(todo => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onToggleCompleted={completeTodoMutation.mutate}
-          />
+          <TodoItem key={todo.id} todo={todo} />
         ))}
       </ul>
       <TodoListFooter

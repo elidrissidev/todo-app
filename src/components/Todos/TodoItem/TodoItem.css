@@ -17,6 +17,12 @@
   background-color: transparent;
   border: none;
   color: var(--text-primary-color);
+  cursor: pointer;
   display: flex;
   padding: 0;
+}
+
+.TodoItem-remove:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }

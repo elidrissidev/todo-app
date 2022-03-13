@@ -25,6 +25,7 @@
   background-color: transparent;
   border: none;
   color: var(--text-secondary-color);
+  cursor: pointer;
   font-family: inherit;
   font-size: inherit;
   padding: 0;
