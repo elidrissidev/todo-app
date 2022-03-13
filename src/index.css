@@ -5,6 +5,7 @@
   --divider-color: #E3E4F1;
   --text-primary-color: #393A4B;
   --text-secondary-color: #9495A5;
+  --text-tertiary-color: #D1D2DA;
 }
 
 .dark {
@@ -14,6 +15,7 @@
   --divider-color: #393A4B;
   --text-primary-color: #C8CBE7;
   --text-secondary-color: #767992;
+  --text-tertiary-color: #4D5067;
 }
 
 *,
