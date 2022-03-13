@@ -1,6 +1,7 @@
 import './App.css'
 import { Header } from '@/components/Header'
 import { CreateTodo } from '@/components/Todos/CreateTodo'
+import { TodosList } from '@/components/Todos/TodosList'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <div className="AppContainer">
         <Header />
         <CreateTodo />
+        <TodosList />
       </div>
     </div>
   )
