@@ -1,12 +1,14 @@
-import { useQuery } from 'react-query'
+import { useQuery, useMutation } from 'react-query'
 
-import { getTodos } from '@/api'
+import { getTodos, completeTodo } from '@/api'
 import { Todo } from '@/types'
 
 function useTodos() {
   const { data } = useQuery<Todo[]>('todos', getTodos)
 
-  return { todos: data }
+  const completeTodoMutation = useMutation(completeTodo)
+
+  return { todos: data, completeTodoMutation }
 }
 
 export default useTodos

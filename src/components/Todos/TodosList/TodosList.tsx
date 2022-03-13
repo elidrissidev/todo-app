@@ -1,18 +1,20 @@
+import React from 'react'
+
 import './TodosList.css'
 import { ReactComponent as IconCross } from '@/assets/icon-cross.svg'
 import useTodos from '@/hooks/useTodos'
-import { Checkbox } from '../Checkbox'
+import { Todo } from '@/types'
 
 export function TodosList() {
-  const { todos } = useTodos()
+  const { todos, completeTodoMutation } = useTodos()
   return (
     <div className="TodosList">
       <ul className="TodoList-list">
         {todos?.map(todo => (
           <TodoItem
             key={todo.id}
-            title={todo.title}
-            completed={todo.is_completed}
+            todo={todo}
+            onToggleCompleted={completeTodoMutation.mutate}
           />
         ))}
       </ul>
@@ -24,15 +26,23 @@ export function TodosList() {
 }
 
 type TodoItemProps = {
-  title: string
-  completed: boolean
+  todo: Todo
+  onToggleCompleted: (data: { id: number; completed: boolean }) => void
 }
 
-function TodoItem({ title, completed }: TodoItemProps) {
+function TodoItem({ todo, onToggleCompleted }: TodoItemProps) {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e =>
+    onToggleCompleted({ id: todo.id, completed: e.target.checked })
+
   return (
     <li className="TodoList-item">
-      <Checkbox defaultChecked={completed} />
-      <span className="TodoList-item-title">{title}</span>
+      <input
+        type="checkbox"
+        className="Checkbox"
+        defaultChecked={todo.is_completed}
+        onChange={handleChange}
+      />
+      <span className="TodoList-item-title">{todo.title}</span>
       <button type="button" className="TodoList-item-remove">
         <IconCross />
         <span className="visually-hidden">Remove Todo</span>
