@@ -10,29 +10,6 @@
   padding: 0;
 }
 
-.TodoList-item {
-  align-items: center;
-  border-bottom: 1px solid var(--divider-color);
-  display: flex;
-  padding: 1rem 1.25rem;
-}
-
-.TodoList-item-title {
-  color: var(--text-primary-color);
-  flex: 1;
-  letter-spacing: -0.17px;
-  margin-left: 0.75rem;
-}
-
-.TodoList-item-remove {
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  color: var(--text-primary-color);
-  display: flex;
-  padding: 0;
-}
-
 .TodoList-footer {
   align-items: center;
   display: flex;

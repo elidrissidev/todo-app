@@ -1,0 +1,22 @@
+.TodoItem {
+  align-items: center;
+  border-bottom: 1px solid var(--divider-color);
+  display: flex;
+  padding: 1rem 1.25rem;
+}
+
+.TodoItem-title {
+  color: var(--text-primary-color);
+  flex: 1;
+  letter-spacing: -0.17px;
+  margin-left: 0.75rem;
+}
+
+.TodoItem-remove {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: var(--text-primary-color);
+  display: flex;
+  padding: 0;
+}
