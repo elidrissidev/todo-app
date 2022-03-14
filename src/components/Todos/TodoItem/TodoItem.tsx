@@ -1,6 +1,5 @@
 import React from 'react'
-
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 
 import './TodoItem.css'
 import { ReactComponent as IconCross } from '@/assets/icon-cross.svg'
@@ -12,7 +11,12 @@ type TodoItemProps = {
 }
 
 export function TodoItem({ todo }: TodoItemProps) {
-  const completeTodoMutation = useMutation(completeTodo)
+  const queryClient = useQueryClient()
+  const completeTodoMutation = useMutation(completeTodo, {
+    onSettled: () => {
+      queryClient.invalidateQueries('todos')
+    },
+  })
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = e =>
     completeTodoMutation.mutate({ id: todo.id, completed: e.target.checked })
