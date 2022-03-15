@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from 'react-query'
 
 import './TodoItem.css'
 import { ReactComponent as IconCross } from '@/assets/icon-cross.svg'
-import { completeTodo } from '@/api'
+import { completeTodo, removeTodo } from '@/api'
 import { Todo } from '@/types'
 
 type TodoItemProps = {
@@ -12,13 +12,35 @@ type TodoItemProps = {
 
 export function TodoItem({ todo }: TodoItemProps) {
   const queryClient = useQueryClient()
+
   const completeTodoMutation = useMutation(completeTodo, {
     onSettled: () => {
       queryClient.invalidateQueries('todos')
     },
   })
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e =>
+  const removeTodoMutation = useMutation(removeTodo, {
+    onMutate: async id => {
+      await queryClient.cancelQueries('todos')
+
+      const prevTodos = queryClient.getQueryData<Todo[]>('todos')
+
+      queryClient.setQueryData(
+        'todos',
+        prevTodos?.filter(todo => todo.id !== id)
+      )
+
+      return { prevTodos }
+    },
+    onError: (_, __, context: any) => {
+      queryClient.setQueryData('todos', context.prevTodos)
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries('todos')
+    },
+  })
+
+  const toggleCompletion: React.ChangeEventHandler<HTMLInputElement> = e =>
     completeTodoMutation.mutate({ id: todo.id, completed: e.target.checked })
 
   return (
@@ -28,10 +50,14 @@ export function TodoItem({ todo }: TodoItemProps) {
         className="Checkbox"
         defaultChecked={todo.is_completed}
         disabled={completeTodoMutation.isLoading}
-        onChange={handleChange}
+        onChange={toggleCompletion}
       />
       <span className="TodoItem-title">{todo.title}</span>
-      <button type="button" className="TodoItem-remove">
+      <button
+        type="button"
+        className="TodoItem-remove"
+        onClick={() => removeTodoMutation.mutate(todo.id)}
+      >
         <IconCross />
         <span className="visually-hidden">Remove Todo</span>
       </button>
