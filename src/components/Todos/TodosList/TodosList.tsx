@@ -1,12 +1,9 @@
-import { useQuery } from 'react-query'
-
 import './TodosList.css'
-import { getTodos } from '@/api'
 import { TodoItem } from '@/components/Todos/TodoItem'
-import { Todo } from '@/types'
+import { useTodos } from '@/hooks/useTodos'
 
 export function TodosList() {
-  const { data: todos } = useQuery<Todo[]>('todos', getTodos)
+  const { todos } = useTodos()
   return (
     <div className="TodosList">
       <ul className="TodoList-list">

@@ -1,7 +1,7 @@
 import apiClient from '@/lib/axios'
 import { Todo } from '@/types'
 
-type CompleteTodoRequest = {
+export type CompleteTodoRequest = {
   id: number
   completed: boolean
 }

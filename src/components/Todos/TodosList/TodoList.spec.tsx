@@ -5,6 +5,7 @@ import nock from 'nock'
 
 import { TodosList } from './TodosList'
 import { SUPABASE_API_BASE_URL } from '@/config'
+import { TodosProvider } from '@/hooks/useTodos'
 
 setLogger({
   log: console.log,
@@ -18,7 +19,7 @@ const todos = [
   { id: 3, title: 'Complete Todo App on Frontend Mentor', is_completed: false },
 ]
 
-describe('TodoList', () => {
+describe('TodosList', () => {
   let queryClient: QueryClient
   let wrapper: React.FC
 
@@ -32,7 +33,9 @@ describe('TodoList', () => {
       },
     })
     wrapper = ({ children }) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <TodosProvider>{children}</TodosProvider>
+      </QueryClientProvider>
     )
   })
 
