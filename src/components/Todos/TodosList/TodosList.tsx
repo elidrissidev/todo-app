@@ -4,15 +4,27 @@ import { TodosListFooter } from '@/components/Todos/TodosListFooter'
 import { useTodos } from '@/hooks/useTodos'
 
 export function TodosList() {
-  const { todos, isLoadingTodos } = useTodos()
+  const { todos, isLoadingTodos, filter } = useTodos()
+
+  const filteredTodos = (todos || []).filter(todo => {
+    switch (filter) {
+      case 'active':
+        return !todo.is_completed
+      case 'completed':
+        return todo.is_completed
+      default:
+        return true
+    }
+  })
+
   return (
     <div className="TodosList" aria-busy={isLoadingTodos}>
       {isLoadingTodos && <div className="TodosList-loading">Loading...</div>}
-      {!isLoadingTodos && todos?.length === 0 && (
+      {!isLoadingTodos && filteredTodos.length === 0 && (
         <div className="TodosList-notfound">Nothing to do</div>
       )}
       <ul className="TodosList-list">
-        {todos?.map(todo => (
+        {filteredTodos.map(todo => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </ul>

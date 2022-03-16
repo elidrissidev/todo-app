@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo } from 'react'
+import React, { createContext, useContext, useMemo, useState } from 'react'
 import {
   UseMutateFunction,
   useMutation,
@@ -19,18 +19,25 @@ import { Todo } from '@/types'
 
 interface TodosContextValue {
   todos?: Todo[]
+  filter: Filter
   isLoadingTodos: boolean
   isUpdatingTodo: boolean
   createTodo: UseMutateFunction<Todo, Error, CreateTodoRequest>
   completeTodo: UseMutateFunction<Todo, Error, CompleteTodoRequest>
   removeTodo: UseMutateFunction<null, Error, number>
   clearCompletedTodos: UseMutateFunction<null, Error>
+  setFilter: (filter: Filter) => void
 }
+
+export type Filter = 'all' | 'active' | 'completed'
 
 const TodosContext = createContext<TodosContextValue | null>(null)
 
 export const TodosProvider: React.FC = ({ children }) => {
+  const [filter, setFilter] = useState<Filter>('all')
+
   const queryClient = useQueryClient()
+
   const { data: todos, isLoading: isLoadingTodos } = useQuery<Todo[]>(
     'todos',
     getTodos
@@ -135,6 +142,7 @@ export const TodosProvider: React.FC = ({ children }) => {
   const value = useMemo(
     () => ({
       todos,
+      filter,
       isLoadingTodos,
       isUpdatingTodo: completeTodoMutation.isLoading,
       isCreatingTodo: createTodoMutation.isLoading,
@@ -142,9 +150,11 @@ export const TodosProvider: React.FC = ({ children }) => {
       completeTodo: completeTodoMutation.mutate,
       removeTodo: removeTodoMutation.mutate,
       clearCompletedTodos: clearCompletedTodosMutation.mutate,
+      setFilter,
     }),
     [
       todos,
+      filter,
       isLoadingTodos,
       completeTodoMutation.isLoading,
       createTodoMutation.isLoading,
