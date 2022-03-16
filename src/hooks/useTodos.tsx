@@ -13,6 +13,7 @@ import {
   CompleteTodoRequest,
   getTodos,
   removeTodo,
+  clearCompletedTodos,
 } from '@/api'
 import { Todo } from '@/types'
 
@@ -23,6 +24,7 @@ interface TodosContextValue {
   createTodo: UseMutateFunction<Todo, Error, CreateTodoRequest>
   completeTodo: UseMutateFunction<Todo, Error, CompleteTodoRequest>
   removeTodo: UseMutateFunction<null, Error, number>
+  clearCompletedTodos: UseMutateFunction<null, Error>
 }
 
 const TodosContext = createContext<TodosContextValue | null>(null)
@@ -108,6 +110,28 @@ export const TodosProvider: React.FC = ({ children }) => {
     },
   })
 
+  const clearCompletedTodosMutation = useMutation<null, Error>(
+    clearCompletedTodos,
+    {
+      onMutate: async () => {
+        await queryClient.cancelQueries('todos')
+
+        const prevTodos = queryClient.getQueryData<Todo[]>('todos')
+
+        queryClient.setQueryData(
+          'todos',
+          prevTodos?.filter(todo => !todo.is_completed)
+        )
+
+        return { prevTodos }
+      },
+      onError: (_, __, context: any) => {
+        queryClient.setQueryData('todos', context.prevTodos)
+      },
+      onSettled: () => queryClient.cancelQueries('todos'),
+    }
+  )
+
   const value = useMemo(
     () => ({
       todos,
@@ -117,6 +141,7 @@ export const TodosProvider: React.FC = ({ children }) => {
       createTodo: createTodoMutation.mutate,
       completeTodo: completeTodoMutation.mutate,
       removeTodo: removeTodoMutation.mutate,
+      clearCompletedTodos: clearCompletedTodosMutation.mutate,
     }),
     [
       todos,
@@ -126,6 +151,7 @@ export const TodosProvider: React.FC = ({ children }) => {
       createTodoMutation.mutate,
       completeTodoMutation.mutate,
       removeTodoMutation.mutate,
+      clearCompletedTodosMutation.mutate,
     ]
   )
 
