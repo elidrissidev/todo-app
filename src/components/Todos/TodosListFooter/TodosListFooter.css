@@ -1,0 +1,25 @@
+.TodosListFooter {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.TodosListFooter-items-left {
+  color: var(--text-secondary-color);
+}
+
+.TodosListFooter-clear-completed {
+  background-color: transparent;
+  border: none;
+  color: var(--text-secondary-color);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+
+.TodosListFooter-clear-completed:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

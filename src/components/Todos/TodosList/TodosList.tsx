@@ -1,5 +1,6 @@
 import './TodosList.css'
 import { TodoItem } from '@/components/Todos/TodoItem'
+import { TodosListFooter } from '@/components/Todos/TodosListFooter'
 import { useTodos } from '@/hooks/useTodos'
 
 export function TodosList() {
@@ -10,40 +11,15 @@ export function TodosList() {
       {!isLoadingTodos && todos?.length === 0 && (
         <div className="TodosList-notfound">Nothing to do</div>
       )}
-      <ul className="TodoList-list">
+      <ul className="TodosList-list">
         {todos?.map(todo => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </ul>
-      <TodoListFooter
+      <TodosListFooter
         itemsLeft={todos?.filter(todo => !todo.is_completed).length}
         completedItems={todos?.filter(todo => todo.is_completed).length}
       />
-    </div>
-  )
-}
-
-type TodoListFooterProps = {
-  itemsLeft?: number
-  completedItems?: number
-}
-
-function TodoListFooter({
-  itemsLeft = 0,
-  completedItems = 0,
-}: TodoListFooterProps) {
-  const { clearCompletedTodos } = useTodos()
-  return (
-    <div className="TodoList-footer">
-      <span className="TodoList-items-left">{itemsLeft} items left</span>
-      <button
-        type="button"
-        className="TodoList-clear-completed"
-        onClick={() => clearCompletedTodos()}
-        disabled={completedItems === 0}
-      >
-        Clear Completed
-      </button>
     </div>
   )
 }
