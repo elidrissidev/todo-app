@@ -10,6 +10,14 @@
   padding: 0;
 }
 
+.TodosList-loading,
+.TodosList-notfound {
+  border-bottom: 1px solid var(--divider-color);
+  color: var(--text-secondary-color);
+  padding: 1rem;
+  text-align: center;
+}
+
 .TodoList-footer {
   align-items: center;
   display: flex;

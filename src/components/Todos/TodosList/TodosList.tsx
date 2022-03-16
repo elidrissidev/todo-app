@@ -3,9 +3,13 @@ import { TodoItem } from '@/components/Todos/TodoItem'
 import { useTodos } from '@/hooks/useTodos'
 
 export function TodosList() {
-  const { todos } = useTodos()
+  const { todos, isLoadingTodos } = useTodos()
   return (
-    <div className="TodosList">
+    <div className="TodosList" aria-busy={isLoadingTodos}>
+      {isLoadingTodos && <div className="TodosList-loading">Loading...</div>}
+      {!isLoadingTodos && todos?.length === 0 && (
+        <div className="TodosList-notfound">Nothing to do</div>
+      )}
       <ul className="TodoList-list">
         {todos?.map(todo => (
           <TodoItem key={todo.id} todo={todo} />
