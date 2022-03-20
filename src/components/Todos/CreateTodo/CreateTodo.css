@@ -14,6 +14,7 @@
 .CreateTodo-input {
   background-color: transparent;
   border: 1px solid transparent;
+  caret-color: var(--text-accent-color);
   color: var(--text-primary-color);
   flex: 1;
   font-family: inherit;
@@ -30,4 +31,16 @@
 
 .CreateTodo-input:focus {
   outline: none;
+}
+
+@media (min-width: 768px) {
+  .CreateTodo {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .CreateTodo-input {
+    margin-left: 1.25rem;
+    letter-spacing: -0.25px;
+  }
 }

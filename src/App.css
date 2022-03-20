@@ -54,4 +54,9 @@
   .AppContainer {
     padding: 4.375rem 0;
   }
+
+  .Checkbox {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
 }
