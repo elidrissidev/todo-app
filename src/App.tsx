@@ -10,11 +10,13 @@ function App() {
     <div className="App">
       <div className="AppContainer">
         <Header />
-        <TodosProvider>
-          <CreateTodo />
-          <TodosList />
-          <TodosFilter />
-        </TodosProvider>
+        <main>
+          <TodosProvider>
+            <CreateTodo />
+            <TodosList />
+            <TodosFilter />
+          </TodosProvider>
+        </main>
       </div>
     </div>
   )
