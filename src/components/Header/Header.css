@@ -12,3 +12,14 @@
   margin: 0;
   text-transform: uppercase;
 }
+
+@media (min-width: 768px) {
+  .Header {
+    height: auto;
+  }
+
+  .Header-title {
+    font-size: 2.5rem;
+    letter-spacing: 0.9375rem;
+  }
+}
