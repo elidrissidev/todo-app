@@ -4,7 +4,7 @@
 }
 
 .App::before {
-  background: url(./assets/bg-mobile-light.jpg) top no-repeat;
+  background: var(--bg-image) top no-repeat;
   background-size: cover;
   content: '';
   height: 12.5rem;
@@ -16,6 +16,8 @@
 }
 
 .AppContainer {
+  max-width: 33.75rem;
+  margin: 0 auto;
   padding: 3rem 1.5rem 0;
 }
 
@@ -38,4 +40,18 @@
 .Checkbox:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .App {
+    font-size: 1.125rem;
+  }
+
+  .App::before {
+    height: 18.75rem;
+  }
+
+  .AppContainer {
+    padding: 4.375rem 0;
+  }
 }
