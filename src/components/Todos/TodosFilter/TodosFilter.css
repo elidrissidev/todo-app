@@ -29,3 +29,9 @@
 .TodosFilter-filter[aria-pressed="true"] {
   color: var(--text-accent-color);
 }
+
+@media (min-width: 768px) {
+  .TodosFilter {
+    display: none;
+  }
+}

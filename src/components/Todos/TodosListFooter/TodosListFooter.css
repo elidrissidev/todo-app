@@ -28,9 +28,21 @@
   opacity: 0.5;
 }
 
+.TodosListFooter-filters {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .TodosListFooter {
     font-size: 0.875rem;
     letter-spacing: -0.19px;
+  }
+
+  .TodosListFooter-filters {
+    align-items: center;
+    column-gap: 1.125rem;
+    display: flex;
+    flex: 1;
+    justify-content: center;
   }
 }
