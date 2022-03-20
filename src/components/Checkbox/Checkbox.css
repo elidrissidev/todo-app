@@ -1,0 +1,35 @@
+.CheckboxWrapper {
+  background: var(--divider-color);
+  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  height: 1.25rem;
+  justify-content: center;
+  padding: 1px;
+  width: 1.25rem;
+}
+
+.CheckboxWrapper:hover:not(.CheckboxWrapper--disabled),
+.CheckboxWrapper--checked {
+  background: linear-gradient(-45deg, #C058F3, #55DDFF);
+}
+
+.Checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--card-bg-color);
+  border-radius: 50%;
+  height: 100%;
+  margin: 0;
+  width: 100%;
+}
+
+.Checkbox:checked {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='9'%3E%3Cpath fill='none' stroke='%23FFF' stroke-width='2' d='M1 4.304L3.696 7l6-6'/%3E%3C/svg%3E") center no-repeat,
+    linear-gradient(-45deg, #C058F3, #55DDFF) no-repeat;
+}
+
+.CheckboxWrapper--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

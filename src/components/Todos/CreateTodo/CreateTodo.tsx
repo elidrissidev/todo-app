@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import './CreateTodo.css'
+import { Checkbox } from '@/components/Checkbox'
 import { useTodos } from '@/hooks/useTodos'
 
 export function CreateTodo() {
@@ -28,10 +29,8 @@ export function CreateTodo() {
         <label htmlFor="todo-completed" className="visually-hidden">
           Todo Completed
         </label>
-        <input
-          type="checkbox"
+        <Checkbox
           id="todo-completed"
-          className="Checkbox"
           onChange={() => setIsCompleted(value => !value)}
           checked={isCompleted}
         />

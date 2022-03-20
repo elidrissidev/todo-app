@@ -5,7 +5,7 @@
   padding: 1rem 1.25rem;
 }
 
-.TodoItem .Checkbox:checked ~ .TodoItem-title {
+.TodoItem--done .TodoItem-title {
   color: var(--text-tertiary-color);
   text-decoration: line-through;
 }

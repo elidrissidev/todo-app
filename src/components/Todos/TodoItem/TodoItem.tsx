@@ -1,7 +1,9 @@
 import './TodoItem.css'
 import { ReactComponent as IconCross } from '@/assets/icon-cross.svg'
+import { Checkbox } from '@/components/Checkbox'
 import { useTodos } from '@/hooks/useTodos'
 import { Todo } from '@/types'
+import classNames from '@/utils/classNames'
 
 type TodoItemProps = {
   todo: Todo
@@ -11,10 +13,13 @@ export function TodoItem({ todo }: TodoItemProps) {
   const { completeTodo, isUpdatingTodo, removeTodo } = useTodos()
 
   return (
-    <li className="TodoItem">
-      <input
-        type="checkbox"
-        className="Checkbox"
+    <li
+      className={classNames(
+        'TodoItem',
+        todo.is_completed ? 'TodoItem--done' : undefined
+      )}
+    >
+      <Checkbox
         defaultChecked={todo.is_completed}
         disabled={isUpdatingTodo}
         onChange={e =>
