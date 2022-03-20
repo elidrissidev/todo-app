@@ -19,7 +19,11 @@ export function TodoItem({ todo }: TodoItemProps) {
         todo.is_completed ? 'TodoItem--done' : undefined
       )}
     >
+      <label htmlFor={`todo-${todo.id}-completed`} className="visually-hidden">
+        Todo Completed
+      </label>
       <Checkbox
+        id={`todo-${todo.id}-completed`}
         defaultChecked={todo.is_completed}
         disabled={isUpdatingTodo}
         onChange={e =>
