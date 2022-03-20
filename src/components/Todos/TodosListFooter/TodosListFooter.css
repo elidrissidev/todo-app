@@ -19,7 +19,18 @@
   padding: 0;
 }
 
+.TodosListFooter-clear-completed:hover:not(:disabled) {
+  color: var(--text-primary-color);
+}
+
 .TodosListFooter-clear-completed:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .TodosListFooter {
+    font-size: 0.875rem;
+    letter-spacing: -0.19px;
+  }
 }
