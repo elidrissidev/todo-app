@@ -4,4 +4,5 @@ export type Todo = {
   updated_at: string | null
   title: string
   is_completed: boolean
+  sort_order: number
 }
