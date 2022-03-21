@@ -28,10 +28,7 @@ export function TodosList() {
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </ul>
-      <TodosListFooter
-        itemsLeft={todos?.filter(todo => !todo.is_completed).length}
-        completedItems={todos?.filter(todo => todo.is_completed).length}
-      />
+      <TodosListFooter />
     </div>
   )
 }

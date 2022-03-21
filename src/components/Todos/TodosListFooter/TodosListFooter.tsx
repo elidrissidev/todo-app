@@ -1,16 +1,12 @@
 import './TodosListFooter.css'
 import { useTodos } from '@/hooks/useTodos'
 
-type TodosListFooterProps = {
-  itemsLeft?: number
-  completedItems?: number
-}
+export function TodosListFooter() {
+  const { todos, clearCompletedTodos, setFilter, filter } = useTodos()
 
-export function TodosListFooter({
-  itemsLeft = 0,
-  completedItems = 0,
-}: TodosListFooterProps) {
-  const { clearCompletedTodos, setFilter, filter } = useTodos()
+  const itemsLeft = todos?.filter(todo => !todo.is_completed).length
+  const completedItems = todos?.filter(todo => todo.is_completed).length
+
   return (
     <div className="TodosListFooter">
       <span className="TodosListFooter-items-left">{itemsLeft} items left</span>
