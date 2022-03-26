@@ -135,7 +135,7 @@ export const TodosProvider: React.FC = ({ children }) => {
       onError: (_, __, context: any) => {
         queryClient.setQueryData('todos', context.prevTodos)
       },
-      onSettled: () => queryClient.cancelQueries('todos'),
+      onSettled: () => queryClient.invalidateQueries('todos'),
     }
   )
 
