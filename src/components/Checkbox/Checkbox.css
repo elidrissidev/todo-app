@@ -1,7 +1,7 @@
 .CheckboxWrapper {
+  align-items: center;
   background: var(--divider-color);
   border-radius: 50%;
-  align-items: center;
   display: flex;
   height: 1.25rem;
   justify-content: center;
@@ -19,9 +19,14 @@
   appearance: none;
   background-color: var(--card-bg-color);
   border-radius: 50%;
+  cursor: pointer;
   height: 100%;
   margin: 0;
   width: 100%;
+}
+
+.Checkbox:disabled {
+  cursor: not-allowed;
 }
 
 .Checkbox:checked {
@@ -30,6 +35,12 @@
 }
 
 .CheckboxWrapper--disabled {
-  cursor: not-allowed;
   opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .CheckboxWrapper {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
 }
