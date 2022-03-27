@@ -19,6 +19,8 @@
   --text-primary-color: #C8CBE7;
   --text-secondary-color: #767992;
   --text-tertiary-color: #4D5067;
+
+  color-scheme: dark;
 }
 
 *,
