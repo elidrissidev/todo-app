@@ -1,10 +1,17 @@
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 
 import './TodosList.css'
 import { TodoItem } from '@/components/Todos/TodoItem'
 import { TodosListFooter } from '@/components/Todos/TodosListFooter'
 import { useTodos } from '@/hooks/useTodos'
+
+const reorder = (list: any[], startIndex: number, endIndex: number) => {
+  const result = Array.from(list)
+  const [removed] = result.splice(startIndex, 1)
+  result.splice(endIndex, 0, removed)
+
+  return result
+}
 
 export function TodosList() {
   const { todos, isLoadingTodos, filter } = useTodos()
@@ -20,19 +27,45 @@ export function TodosList() {
     }
   })
 
+  const onDragEnd = (result: DropResult) => {
+    if (
+      !result.destination || // dropped outside the todos list
+      result.source.index === result.destination.index // dropped into the same index
+    ) {
+      return
+    }
+
+    const items = reorder(
+      todos || [],
+      result.source.index,
+      result.destination.index
+    )
+
+    console.log(items)
+  }
+
   return (
     <div className="TodosList" aria-busy={isLoadingTodos}>
       {isLoadingTodos && <div className="TodosList-loading">Loading...</div>}
       {!isLoadingTodos && filteredTodos.length === 0 && (
         <div className="TodosList-notfound">Nothing to do</div>
       )}
-      <DndProvider backend={HTML5Backend}>
-        <ul className="TodosList-list">
-          {filteredTodos.map(todo => (
-            <TodoItem key={todo.id} todo={todo} />
-          ))}
-        </ul>
-      </DndProvider>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="todos-list">
+          {(provided, _) => (
+            <ul
+              className="TodosList-list"
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {filteredTodos.map((todo, index) => (
+                <TodoItem key={todo.id} todo={todo} index={index} />
+              ))}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
       <TodosListFooter />
     </div>
   )
