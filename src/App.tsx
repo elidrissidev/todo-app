@@ -15,6 +15,7 @@ function App() {
             <CreateTodo />
             <TodosList />
             <TodosFilter />
+            <span className="DragDropHint">Drag and drop to reorder list</span>
           </TodosProvider>
         </main>
       </div>

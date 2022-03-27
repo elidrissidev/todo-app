@@ -21,6 +21,15 @@
   padding: 3rem 1.5rem 0;
 }
 
+.DragDropHint {
+  color: var(--text-secondary-color);
+  display: block;
+  font-size: 0.875rem;
+  letter-spacing: -0.19px;
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   .App {
     font-size: 1.125rem;
@@ -34,8 +43,7 @@
     padding: 4.375rem 0;
   }
 
-  .Checkbox {
-    height: 1.5rem;
-    width: 1.5rem;
+  .DragDropHint {
+    margin-top: 3.125rem;
   }
 }
