@@ -14,8 +14,11 @@ import {
   getTodos,
   removeTodo,
   clearCompletedTodos,
+  ReorderTodosRequest,
+  reorderTodos,
 } from '@/api'
 import { Todo } from '@/types'
+import reorderArray from '@/utils/reorderArray'
 
 interface TodosContextValue {
   todos?: Todo[]
@@ -26,6 +29,7 @@ interface TodosContextValue {
   completeTodo: UseMutateFunction<Todo, Error, CompleteTodoRequest>
   removeTodo: UseMutateFunction<null, Error, number>
   clearCompletedTodos: UseMutateFunction<null, Error>
+  reorderTodos: UseMutateFunction<void, Error, ReorderTodosRequest>
   setFilter: (filter: Filter) => void
 }
 
@@ -52,13 +56,13 @@ export const TodosProvider: React.FC = ({ children }) => {
         const prevTodos = queryClient.getQueryData<Todo[]>('todos')
 
         queryClient.setQueryData('todos', [
-          ...(prevTodos || []),
           {
             id: -1,
             title,
             is_completed,
             created_at: new Date().toISOString(),
           },
+          ...(prevTodos || []),
         ])
 
         return { prevTodos }
@@ -139,6 +143,28 @@ export const TodosProvider: React.FC = ({ children }) => {
     }
   )
 
+  const reorderTodosMutation = useMutation<void, Error, ReorderTodosRequest>(
+    reorderTodos,
+    {
+      onMutate: async ({ source_index, destination_index }) => {
+        await queryClient.cancelQueries('todos')
+
+        const prevTodos = queryClient.getQueryData<Todo[]>('todos')
+
+        queryClient.setQueryData(
+          'todos',
+          reorderArray(prevTodos || [], source_index, destination_index)
+        )
+
+        return { prevTodos }
+      },
+      onError: (_, __, context: any) => {
+        queryClient.setQueryData('todos', context.prevTodos)
+      },
+      onSettled: () => queryClient.invalidateQueries('todos'),
+    }
+  )
+
   const value = useMemo(
     () => ({
       todos,
@@ -150,6 +176,7 @@ export const TodosProvider: React.FC = ({ children }) => {
       completeTodo: completeTodoMutation.mutate,
       removeTodo: removeTodoMutation.mutate,
       clearCompletedTodos: clearCompletedTodosMutation.mutate,
+      reorderTodos: reorderTodosMutation.mutate,
       setFilter,
     }),
     [
@@ -162,6 +189,7 @@ export const TodosProvider: React.FC = ({ children }) => {
       completeTodoMutation.mutate,
       removeTodoMutation.mutate,
       clearCompletedTodosMutation.mutate,
+      reorderTodosMutation.mutate,
     ]
   )
 

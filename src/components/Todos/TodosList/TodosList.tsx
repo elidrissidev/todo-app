@@ -4,17 +4,10 @@ import './TodosList.css'
 import { TodoItem } from '@/components/Todos/TodoItem'
 import { TodosListFooter } from '@/components/Todos/TodosListFooter'
 import { useTodos } from '@/hooks/useTodos'
-
-const reorder = (list: any[], startIndex: number, endIndex: number) => {
-  const result = Array.from(list)
-  const [removed] = result.splice(startIndex, 1)
-  result.splice(endIndex, 0, removed)
-
-  return result
-}
+import reorderArray from '@/utils/reorderArray'
 
 export function TodosList() {
-  const { todos, isLoadingTodos, filter } = useTodos()
+  const { todos, isLoadingTodos, filter, reorderTodos } = useTodos()
 
   const filteredTodos = (todos || []).filter(todo => {
     switch (filter) {
@@ -35,13 +28,17 @@ export function TodosList() {
       return
     }
 
-    const items = reorder(
+    const items = reorderArray(
       todos || [],
       result.source.index,
       result.destination.index
     )
 
-    console.log(items)
+    reorderTodos({
+      todo_ids: items.map(todo => todo.id),
+      source_index: result.source.index,
+      destination_index: result.destination.index,
+    })
   }
 
   return (
