@@ -13,10 +13,14 @@ type TodoItemProps = {
 }
 
 export function TodoItem({ todo, index }: TodoItemProps) {
-  const { completeTodo, isUpdatingTodo, removeTodo } = useTodos()
+  const { completeTodo, filter, isUpdatingTodo, removeTodo } = useTodos()
 
   return (
-    <Draggable draggableId={todo.id.toString()} index={index}>
+    <Draggable
+      draggableId={todo.id.toString()}
+      index={index}
+      isDragDisabled={filter !== 'all'}
+    >
       {(provided, snapshot) => (
         <li
           className={classNames(
